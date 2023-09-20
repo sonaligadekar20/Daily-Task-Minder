@@ -1,0 +1,26 @@
+.task-container{
+    max-width: 300px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #26cb17;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+.task-title{
+    margin: 2px;
+}
+.task-description{
+    margin: 5px;
+}
+.task-priority{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: rgb(42, 165, 54);
+    color: white;
+    border-radius: 0 10px 0 0;
+    padding: 2px;
+    width: 80px;
+
+}
