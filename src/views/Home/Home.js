@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Task from "./../../components/Task/Task";
 
 import "./Home.css";
@@ -13,9 +13,18 @@ import "./Home.css";
         }
     ])
 
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [priority, setpriority] = useState('')
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [priority, setpriority] = useState('');
+
+    useEffect(()=>{
+        const list = JSON.parse(localStorage.getItem('task-minder'));
+        setTaskList(list)
+    },{})
+
+    const saveListToLocalStorage = (tasks)=>{
+        localStorage.setItem('task-minder',JSON.stringify(tasks))
+    }
 
     const addTaskToList = () => {
         const randomId = Math.floor(Math.random() * 1000);
@@ -25,11 +34,15 @@ import "./Home.css";
             description: description,
             priority: priority
         }
-        setTaskList([...taskList, obj])
+
+        const newTaskList = [...taskList, obj]
+        setTaskList(newTaskList)
 
         setTitle('');
         setDescription('');
         setpriority('');
+
+        saveListToLocalStorage(newTaskList);
     }
 
     const removeTaskFromList = (id) => {
@@ -45,6 +58,8 @@ import "./Home.css";
         tempArray.splice(index, 1);
     
         setTaskList([...tempArray])
+
+        saveListToLocalStorage(tempArray);
     }
 
     return (
