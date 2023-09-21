@@ -32,8 +32,14 @@ import "./Home.css";
         setpriority('');
     }
 
-    const removeTaskFromList = (obj) => {
-        const index = taskList.indexOf(obj);
+    const removeTaskFromList = (id) => {
+        // const index = taskList.indexOf(obj);
+        let index;
+        taskList.forEach((task,i)=>{
+            if(task.id===id){
+                index=i
+            }
+        })
         
         const tempArray = taskList;
         tempArray.splice(index, 1);
