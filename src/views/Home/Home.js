@@ -1,36 +1,26 @@
-import React, { useState } from 'react'
-import Task from "./../../components/Task/Task"
+import React, { useState } from 'react';
+import Task from "./../../components/Task/Task";
 
-import "./Home.css"
+import "./Home.css";
 
-export const Home = () => {
+ const Home = () => {
     const [taskList, setTaskList] = useState([
         {
             id: 1,
             title: 'Submit assignment',
             description: 'Nahi to gali padegi',
             priority: 'high'
-
-        },
-        // {
-        //     id: 2,
-        //     title: 'Go To Market',
-        //     description: 'Buy Alu & Gobi',
-        //     priority: 'medium'
-
-        // },
-       
+        }
     ])
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [priority, setpriority] = useState('')
 
-
     const addTaskToList = () => {
         const randomId = Math.floor(Math.random() * 1000);
         const obj = {
-            id: 'randomId',
+            id: randomId,
             title: title,
             description: description,
             priority: priority
@@ -40,6 +30,15 @@ export const Home = () => {
         setTitle('');
         setDescription('');
         setpriority('');
+    }
+
+    const removeTaskFromList = (obj) => {
+        const index = taskList.indexOf(obj);
+        
+        const tempArray = taskList;
+        tempArray.splice(index, 1);
+    
+        setTaskList([...tempArray])
     }
 
     return (
@@ -52,7 +51,13 @@ export const Home = () => {
                     {
                         taskList.map((taskItem, index) => {
                             const { id, title, description, priority } = taskItem;
-                            return <Task id={id} title={title} description={description} priority={priority}
+                            return <Task id={id}
+                                title={title}
+                                description={description}
+                                priority={priority}
+                                key={index}
+                                removeTaskFromList={removeTaskFromList}
+                                obj={taskItem}
                             />
                         })
                     }
@@ -102,5 +107,4 @@ export const Home = () => {
         </div>
     )
 }
-
-export default Home                     
+export default Home;
