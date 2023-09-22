@@ -17,7 +17,7 @@ const Home = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('');
-    const [isEdit, setIsEdit] = useState(true)
+    const [isEdit, setIsEdit] = useState(false)
 
     useEffect(() => {
         const list = JSON.parse(localStorage.getItem('task-minder'));
@@ -84,6 +84,33 @@ const Home = () => {
         console.log (currentEditTask);
         // console.log(id)
     }
+    const UpdateTask = ()=> {
+        let indexToUpdate;
+        taskList.forEach((task, i) => {
+            if(task.id === id){
+                indexToUpdate = i;
+            }
+        })
+
+        const tempArray = taskList;
+        tempArray[indexToUpdate] = {
+            id: id,
+            title: title,
+            description: description,
+            priority: priority
+        }
+
+        setTaskList([...tempArray])
+
+        saveListToLocalStorage(tempArray)
+
+        setId(0);
+        setTitle('');
+        setDescription('');
+        setPriority('');
+        setIsEdit(false)
+
+    }
 
     return (
         <div className='container'>
@@ -147,7 +174,7 @@ const Home = () => {
                                     isEdit ?
                                         <button className='btn-add-task'
                                             type='button'
-                                            onClick={addTaskToList}>
+                                            onClick={UpdateTask}>
                                             Update Task
                                         </button>
                                         :
