@@ -42,3 +42,11 @@
     display: flex;
     justify-content: space-around;
 }
+.tasks-container{
+    /* background-color: #ff0066; */
+    height: 400px;
+    overflow-y:scroll;
+}
+.tasks-container::-webkit-scrollbar{
+    width: 5px;
+}

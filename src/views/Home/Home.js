@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Task from "./../../components/Task/Task";
+import Task from "./../../components/Task/Task";    
+import showToast from 'crunchy-toast';
 
 import "./Home.css";
 
@@ -27,8 +28,15 @@ const Home = () => {
 
     }, [])
 
+    
     const saveListToLocalStorage = (tasks) => {
         localStorage.setItem('task-minder', JSON.stringify(tasks))
+    }
+    
+    const clearInputFields= () => {
+        setTitle('');
+        setDescription('');
+        setPriority('');
     }
 
     const addTaskToList = () => {
@@ -43,15 +51,12 @@ const Home = () => {
         const newTaskList = [...taskList, obj]
         setTaskList(newTaskList)
 
-        setTitle('');
-        setDescription('');
-        setPriority('');
-
+        clearInputFields();
         saveListToLocalStorage(newTaskList);
+        showToast('Task added successfully!', 'success', 3000);
     }
 
     const removeTaskFromList = (id) => {
-        // const index = taskList.indexOf(obj);
         let index;
         taskList.forEach((task, i) => {
             if (task.id === id) {
@@ -65,6 +70,8 @@ const Home = () => {
         setTaskList([...tempArray])
 
         saveListToLocalStorage(tempArray);
+        showToast('Task deleted successfully!', 'alert', 3000);
+        
     }
     const setTaskEditable = (id) => {
         setIsEdit(true);
@@ -82,7 +89,7 @@ const Home = () => {
         setPriority(currentEditTask.priority);
 
         console.log (currentEditTask);
-        // console.log(id)
+
     }
     const UpdateTask = ()=> {
         let indexToUpdate;
@@ -100,14 +107,13 @@ const Home = () => {
             priority: priority
         }
 
-        setTaskList([...tempArray])
+        setTaskList([...tempArray]);
 
-        saveListToLocalStorage(tempArray)
-
+        saveListToLocalStorage(tempArray);
+        showToast('Task updated successfully!', 'info', 3000);
+        
         setId(0);
-        setTitle('');
-        setDescription('');
-        setPriority('');
+        clearInputFields();
         setIsEdit(false)
 
     }
@@ -119,6 +125,7 @@ const Home = () => {
             <div className='todo-flex-container'>
                 <div>
                     <h2 className='text-center'>Show List</h2>
+                    <div className='tasks-container'>
                     {
                         taskList.map((taskItem, index) => {
                             const { id, title, description, priority } = taskItem;
@@ -128,11 +135,13 @@ const Home = () => {
                                 priority={priority}
                                 key={index}
                                 removeTaskFromList={removeTaskFromList}
-                                // obj={taskItem}
                                 setTaskEditable={setTaskEditable}
                             />
                         })
                     }
+
+                    </div>
+
                 </div>
 
                 <div>
