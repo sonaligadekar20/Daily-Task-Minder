@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Task from "./../../components/Task/Task";    
+import Task from "./../../components/Task/Task";
 import showToast from 'crunchy-toast';
-
+import { saveListToLocalStorage } from "./../../util/localstorage";
 import "./Home.css";
+
 
 const Home = () => {
     const [taskList, setTaskList] = useState([
@@ -13,8 +14,8 @@ const Home = () => {
             priority: 'high'
         }
     ])
-    
-    const [id, setId] = useState (0);
+
+    const [id, setId] = useState(0);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('');
@@ -27,19 +28,44 @@ const Home = () => {
         }
 
     }, [])
-
-    
-    const saveListToLocalStorage = (tasks) => {
-        localStorage.setItem('task-minder', JSON.stringify(tasks))
-    }
-    
-    const clearInputFields= () => {
+    const clearInputFields = (task) => {
         setTitle('');
         setDescription('');
         setPriority('');
     }
+    const findTaskIndexById = (taskId) => {
+        let index;
 
+        taskList.forEach((task, i) => {
+            if (task.id === taskId) {
+                index = i
+            }
+        })
+        return index;
+    }
+    
+    const checkRequiredFields = () => { 
+        if(!title){
+            showToast('Title is required', 'warning', 3000);
+            return false ;
+        }
+
+        if(!description){
+            showToast('Description is required', 'warning', 3000);
+            return false;
+        }
+
+        if(!priority){
+            showToast('Priority is required', 'warning', 3000);
+            return false;
+        }
+        return true;
+    }
     const addTaskToList = () => {
+        
+        if(checkRequiredFields() === false){
+            return;
+        }
         const randomId = Math.floor(Math.random() * 1000);
         const obj = {
             id: randomId,
@@ -57,12 +83,8 @@ const Home = () => {
     }
 
     const removeTaskFromList = (id) => {
-        let index;
-        taskList.forEach((task, i) => {
-            if (task.id === id) {
-                index = i
-            }
-        })
+       
+        const index = findTaskIndexById(id);
 
         const tempArray = taskList;
         tempArray.splice(index, 1);
@@ -71,33 +93,27 @@ const Home = () => {
 
         saveListToLocalStorage(tempArray);
         showToast('Task deleted successfully!', 'alert', 3000);
-        
+
     }
     const setTaskEditable = (id) => {
         setIsEdit(true);
         setId(id);
 
-        let currentEditTask;
-        taskList.forEach((task)=>{
-            if (task.id === id){
-                currentEditTask = task;
-            }
-        })
+        const index = findTaskIndexById(id);
+        const currentEditTask = taskList[index];
 
         setTitle(currentEditTask.title);
         setDescription(currentEditTask.description);
         setPriority(currentEditTask.priority);
 
-        console.log (currentEditTask);
-
     }
-    const UpdateTask = ()=> {
-        let indexToUpdate;
-        taskList.forEach((task, i) => {
-            if(task.id === id){
-                indexToUpdate = i;
-            }
-        })
+    const UpdateTask = () => {
+       
+        if(checkRequiredFields() === false){
+            return;
+        }
+
+        const indexToUpdate = findTaskIndexById(id);
 
         const tempArray = taskList;
         tempArray[indexToUpdate] = {
@@ -111,7 +127,7 @@ const Home = () => {
 
         saveListToLocalStorage(tempArray);
         showToast('Task updated successfully!', 'info', 3000);
-        
+
         setId(0);
         clearInputFields();
         setIsEdit(false)
@@ -120,25 +136,25 @@ const Home = () => {
 
     return (
         <div className='container'>
-            <h1 className='app-title'> Daily Task Minder 📃</h1>
+            <h1 className='app-title'> 🎯DAILY TASK MINDER🎯</h1>
 
             <div className='todo-flex-container'>
                 <div>
-                    <h2 className='text-center'>Show List</h2>
+                    <h1 className='text-center'>Show List</h1>
                     <div className='tasks-container'>
-                    {
-                        taskList.map((taskItem, index) => {
-                            const { id, title, description, priority } = taskItem;
-                            return <Task id={id}
-                                title={title}
-                                description={description}
-                                priority={priority}
-                                key={index}
-                                removeTaskFromList={removeTaskFromList}
-                                setTaskEditable={setTaskEditable}
-                            />
-                        })
-                    }
+                        {
+                            taskList.map((taskItem, index) => {
+                                const { id, title, description, priority } = taskItem;
+                                return <Task id={id}
+                                    title={title}
+                                    description={description}
+                                    priority={priority}
+                                    key={index}
+                                    removeTaskFromList={removeTaskFromList}
+                                    setTaskEditable={setTaskEditable}
+                                />
+                            })
+                        }
 
                     </div>
 
@@ -178,21 +194,17 @@ const Home = () => {
                                 placeholder='Enter Priority'
                                 className='task-input' />
 
+                        
                             <div className='btn-container'>
-                                {
-                                    isEdit ?
-                                        <button className='btn-add-task'
-                                            type='button'
-                                            onClick={UpdateTask}>
-                                            Update Task
-                                        </button>
-                                        :
-                                        <button className='btn-add-task'
-                                            type='button'
-                                            onClick={addTaskToList}>
-                                            Add Task
-                                        </button>
-                                }
+                                <button className='btn-add-task'
+                                    type='button'
+                                    onClick={() => {
+                                        isEdit ? UpdateTask() : addTaskToList()
+                                    }}>
+                                    {isEdit ? 'Update' : 'Add Task'
+                                    }
+                                </button>
+
                             </div>
 
                         </form>

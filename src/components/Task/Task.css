@@ -4,7 +4,8 @@
     padding: 15px;
     border-radius: 10px;
     /* border: 1px solid  #ff4d94; */
-    box-shadow: 0  0 1px 1px  #ff4d94;
+    /* box-shadow: 0  0 2px 1.5px #00cccc; */
+    background-color:beige;
     position: relative;
 }
 .task-title{
@@ -12,12 +13,13 @@
 }
 .task-description{
     margin: 5px;
+    font-size: 21px;
 }
 .task-priority{
     position: absolute;
     right: 0;
     top: 0;
-    background-color:#ff0080;
+    background-color:#006666;
     color: white;
     border-radius: 0 10px 0 0;
     padding: 2px;
@@ -28,6 +30,9 @@
     bottom: 5px;
     right: 5px;
     cursor: pointer;
+    box-shadow: 0 0 5px 1px black;
+    font-size: 24px;
+    border-radius: 50px ;
 }
 
 .task-edit-icon{
@@ -35,5 +40,8 @@
     bottom: 5px;
     right: 50px;
     cursor: pointer;
+    box-shadow: 0 0 5px 1px black;
+    font-size: 24px;
+    border-radius: 50px ;
     
 }

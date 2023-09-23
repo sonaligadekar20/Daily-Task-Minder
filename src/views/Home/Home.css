@@ -1,23 +1,25 @@
+
 .container{
-    padding: 10px;
-    margin: 0;
-    /* background-color: bisque; */
-    min-height: 100vh;
+    background-color: rgb(239, 191, 184);
+    height: 100vw;
+   padding: 30px;
 }
 .app-title{
     text-align: center;
-    background-color:#b30047;
-    width:fit-content;
-    padding: 10px 40px;
+    font-size: 30px;
+    background-color: rgb(237, 161, 150);
+    width: fit-content;
     display: block;
-    margin: 10px auto ;
+    margin: 10px auto;
+  
+    padding: 10px;
     border-radius: 10px;
-    color: white;
 }
 .todo-flex-container{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    margin-top: 60px;
 }
 .task-input{
     display: block;
@@ -29,14 +31,22 @@
     margin: 30px 10px ;
 }
 .btn-add-task{
-    background-color:#ff0066;
-    color: #fff;
+    background-color:rgb(237, 161, 150);
+   font-weight: bold;
+   border:5px rgb(244, 136, 119);
     border-radius: 15px;
     padding: 10px 5px;
     border: none;
     margin:20px;
     font-size: 20px;
-    width: 150px;
+    width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text-center{
+   text-align: center;
+   font-size: 30px;
 }
 .btn-container{
     display: flex;
@@ -49,4 +59,8 @@
 }
 .tasks-container::-webkit-scrollbar{
     width: 5px;
+}
+.task-input{
+    border: none;
+    font-size: 17px;
 }
