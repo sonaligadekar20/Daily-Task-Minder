@@ -10,7 +10,7 @@ const Home = () => {
         {
             id: 1,
             title: 'Submit assignment',
-            description: 'Nahi to gali padegi',
+            description: 'Nahi to punishment milegi',
             priority: 'high'
         }
     ])
@@ -140,7 +140,7 @@ const Home = () => {
 
             <div className='todo-flex-container'>
                 <div>
-                    <h1 className='text-center'>Show List</h1>
+                    <h1 className='text-center'>Task List</h1>
                     <div className='tasks-container'>
                         {
                             taskList.map((taskItem, index) => {
@@ -172,7 +172,7 @@ const Home = () => {
                                 onChange={(e) => {
                                     setTitle(e.target.value)
                                 }}
-                                placeholder='Enter Title'
+                                placeholder='Enter title'
                                 className='task-input' />
 
 
@@ -182,7 +182,7 @@ const Home = () => {
                                 onChange={(e) => {
                                     setDescription(e.target.value)
                                 }}
-                                placeholder='Enter Description'
+                                placeholder='Enter description'
                                 className='task-input' />
 
                             <input
@@ -191,7 +191,7 @@ const Home = () => {
                                 onChange={(e) => {
                                     setPriority(e.target.value)
                                 }}
-                                placeholder='Enter Priority'
+                                placeholder='Enter priority'
                                 className='task-input' />
 
                         
@@ -201,7 +201,7 @@ const Home = () => {
                                     onClick={() => {
                                         isEdit ? UpdateTask() : addTaskToList()
                                     }}>
-                                    {isEdit ? 'Update' : 'Add Task'
+                                    {isEdit ? 'Update' : 'Add Task To List'
                                     }
                                 </button>
 

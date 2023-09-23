@@ -1,17 +1,17 @@
-
 .container{
-    background-color: rgb(239, 191, 184);
-    height: 100vw;
+    background-color: rgb(243, 203, 197);
+    height: 100vh;
    padding: 30px;
 }
 .app-title{
     text-align: center;
-    font-size: 30px;
+    font-size: 33px;
     background-color: rgb(237, 161, 150);
-    width: fit-content;
+    width: 500px; 
     display: block;
     margin: 10px auto;
-  
+    letter-spacing: 1px;
+    word-spacing: 3px;
     padding: 10px;
     border-radius: 10px;
 }
@@ -31,18 +31,23 @@
     margin: 30px 10px ;
 }
 .btn-add-task{
-    background-color:rgb(237, 161, 150);
-   font-weight: bold;
-   border:5px rgb(244, 136, 119);
-    border-radius: 15px;
+    background-color:rgb(242, 155, 141);
+    font-weight: bold;
+    border-radius: 25px;
     padding: 10px 5px;
-    border: none;
     margin:20px;
     font-size: 20px;
-    width: 300px;
+    width: 250px;
+    border: 8px rgb(216, 63, 39);
     display: block;
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer;
+}
+.btn-add-task:hover{
+    width: 260px;
+    transition: 0.5s;
+
 }
 .text-center{
    text-align: center;
@@ -63,4 +68,21 @@
 .task-input{
     border: none;
     font-size: 17px;
+    border: 1px solid rgb(238, 126, 109);
 }
+
+@media screen and (max-width:600px){
+
+    .container{
+        background-color: rgb(243, 203, 197);
+        height: 200vh;
+       padding: 30px;
+    }
+    .todo-flex-container{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 60px;
+    }
+
+}
+    
