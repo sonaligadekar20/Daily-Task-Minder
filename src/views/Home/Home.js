@@ -135,7 +135,7 @@ const Home = () => {
     return (
         <div className='container'>
             <h1 className='app-title'> 🎯DAILY TASK MINDER🎯</h1>
-         <button className='btn-sourcecode'> <a href='https://github.com/sonaligadekar20/Daily-Task-Minder' target='blank'>source code  </a></button>
+         <button className='btn-sourcecode'> <a href='https://github.com/sonaligadekar20/Daily-Task-Minder' target='blank'>source code <i class="fa-brands fa-github"></i></a></button>
             <div className='todo-flex-container'>
                 <div>
                     <h1 className='text-center'>Task List</h1>
@@ -208,9 +208,6 @@ const Home = () => {
             <Footer />
 
         </div>
-
-
-
 
     )
 }

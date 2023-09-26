@@ -16,10 +16,10 @@
 }
 
 .github-logo{
-    height: 28px;
+    height: 27px;
     /* margin-top: 10px;    */
     margin-left: 10px;
-    box-shadow: 0 0 1px 1px whitesmoke;
+    box-shadow: 0 0 1px 1px grey;
     border-radius: 50%;
     position: absolute;
        
