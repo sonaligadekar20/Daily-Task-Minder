@@ -3,6 +3,7 @@ import Task from "./../../components/Task/Task";
 import showToast from 'crunchy-toast';
 import { saveListToLocalStorage } from "./../../util/localstorage";
 import "./Home.css";
+import Footer from '../../components/Footer/Footer';
 
 
 const Home = () => {
@@ -26,7 +27,6 @@ const Home = () => {
         if (list && list.length > 0) {
             setTaskList(list)
         }
-
     }, [])
     const clearInputFields = (task) => {
         setTitle('');
@@ -35,7 +35,6 @@ const Home = () => {
     }
     const findTaskIndexById = (taskId) => {
         let index;
-
         taskList.forEach((task, i) => {
             if (task.id === taskId) {
                 index = i
@@ -43,27 +42,27 @@ const Home = () => {
         })
         return index;
     }
-    
-    const checkRequiredFields = () => { 
-        if(!title){
+
+    const checkRequiredFields = () => {
+        if (!title) {
             showToast('Title is required', 'warning', 3000);
-            return false ;
+            return false;
         }
 
-        if(!description){
+        if (!description) {
             showToast('Description is required', 'warning', 3000);
             return false;
         }
 
-        if(!priority){
+        if (!priority) {
             showToast('Priority is required', 'warning', 3000);
             return false;
         }
         return true;
     }
+
     const addTaskToList = () => {
-        
-        if(checkRequiredFields() === false){
+        if (checkRequiredFields() === false) {
             return;
         }
         const randomId = Math.floor(Math.random() * 1000);
@@ -83,7 +82,7 @@ const Home = () => {
     }
 
     const removeTaskFromList = (id) => {
-       
+
         const index = findTaskIndexById(id);
 
         const tempArray = taskList;
@@ -108,13 +107,12 @@ const Home = () => {
 
     }
     const UpdateTask = () => {
-       
-        if(checkRequiredFields() === false){
+
+        if (checkRequiredFields() === false) {
             return;
         }
 
         const indexToUpdate = findTaskIndexById(id);
-
         const tempArray = taskList;
         tempArray[indexToUpdate] = {
             id: id,
@@ -137,7 +135,7 @@ const Home = () => {
     return (
         <div className='container'>
             <h1 className='app-title'> 🎯DAILY TASK MINDER🎯</h1>
-
+         <button className='btn-sourcecode'> <a href='https://github.com/sonaligadekar20/Daily-Task-Minder' target='blank'>source code  </a></button>
             <div className='todo-flex-container'>
                 <div>
                     <h1 className='text-center'>Task List</h1>
@@ -157,7 +155,6 @@ const Home = () => {
                         }
 
                     </div>
-
                 </div>
 
                 <div>
@@ -194,26 +191,27 @@ const Home = () => {
                                 placeholder='Enter priority'
                                 className='task-input' />
 
-                        
                             <div className='btn-container'>
                                 <button className='btn-add-task'
                                     type='button'
                                     onClick={() => {
                                         isEdit ? UpdateTask() : addTaskToList()
                                     }}>
-                                    {isEdit ? 'Update' : 'Add Task To List'
+                                    {isEdit ? 'Update' : 'Add Task To List '
                                     }
                                 </button>
-
                             </div>
-
                         </form>
                     </div>
                 </div>
-
             </div>
+            <Footer />
 
         </div>
+
+
+
+
     )
 }
 export default Home;
